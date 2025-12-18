@@ -20,20 +20,22 @@
 body{
     margin:0;
     padding:0;
-    height:100vh;
+    min-height:100vh;
     background: radial-gradient(circle at top,#3a0b1d,#000 70%);
     color:white;
     font-family: "Shantell Sans", "Shantell Sans Fallback", cursive;
-    overflow:hidden;
+    overflow-x: hidden
+    overflow-y: auto
     position:relative;
 }
 
 /* COMMON PAGE STYLE */
 .page{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex start;
+    min-height: 100vh;
+    padding: 20px 10px;
     width:100%;
     box-sizing:border-box;
 }
@@ -70,7 +72,7 @@ body{
     overflow:hidden;
     position:relative;
     background:rgba(255,255,255,0.1);
-    margin:20px auto;
+    margin: 20px auto;
 }
 
 .slide{
@@ -133,7 +135,7 @@ body{
 }
 
 .confessionText{
-    max-height:55vh;
+    max-height:70vh;
     overflow-y:auto;
     padding:12px;
     margin:0;
@@ -166,14 +168,24 @@ body{
 
 .page-special{
     font-family: "Shantell Sans", "Shantell Sans Fallback", cursive;
+    display: flex;
+    flex direction: column;
+    justify content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 .page-special .page-gif{
-    width:160px;
-    margin-bottom:20px;
+    width: 80%;
+    max-width: 220px;
+    height: auto;
+    max-height: 40vh;
+    margin-bottom:15px;
     border-radius:15px;
 }
 #lyrics-container{
-    font-size:26px;
+    font-size:36px;
     min-height:60px;
     white-space: pre-line;
     display: inline-block;
