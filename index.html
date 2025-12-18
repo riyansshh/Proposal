@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confession + Special 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+.page,
+.modal {
+    position: relative;
+    z-index: 1;
+}
+
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background: radial-gradient(circle at top,#3a0b1d,#000 70%);
+    color:white;
+    font-family: "Shantell Sans", "Shantell Sans Fallback", cursive;
+    overflow-x: hidden
+    overflow-y: auto
+    position:relative;
+}
+
+/* COMMON PAGE STYLE */
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: flex start;
+    min-height: 100vh;
+    padding: 20px 10px;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.page-inner{
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+    text-align:center;
+    padding:10px;
+    box-sizing:border-box;
+}
+
+.text{
+    font-size:24px;
+    font-weight:600;
+    margin:5px 10px;
+}
+
+.wishesText{
+    font-size:20px;
+    line-height:28px;
+    margin:5px 10px;
+    font-weight:500;
+}
+
+.emoji{font-size:32px;margin:5px;}
+
+.letterSlideshow{
+    width:90%;
+    max-width:400px;
+    height:380px;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+    background:rgba(255,255,255,0.1);
+    margin: 20px auto;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    color:white;
+    opacity:0;
+    transition: opacity 0.5s;
+}
+
+.btn{
+    margin:10px;
+    padding:12px 28px;
+    background:#e94b8b;
+    color:white;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(5px);
+    color:white;
+    z-index: 2;
+}
+
+.modal-content{
+    background: radial-gradient(circle at top,#3a0b1d,#000 70%);
+    border-radius:20px;
+    padding:20px;
+    width:80%;
+    max-width:320px;
+    margin:auto;
+    margin-top:35vh;
+}
+
+.close{
+    float:right;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.confessionHeading{
+    font-size:28px;
+    font-weight:600;
+    margin:10px 0;
+}
+
+.confessionText{
+    max-height:70vh;
+    overflow-y:auto;
+    padding:12px;
+    margin:0;
+    text-align:left;
+    font-size:18px;
+    line-height:26px;
+    background: rgba(255,255,255,0.05);
+    border-radius:16px;
+    box-sizing:border-box;
+    width:90%;
+    max-width:400px;
+}
+
+.floating {
+    position: fixed;
+    z-index:999999;
+    font-size: 20px;
+    pointer-events: none;
+    user-select: none;
+    --r: 0deg; 
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(1) rotate(var(--r)); opacity:1; }
+    100% { transform: translateY(-10vh) scale(0.5) rotare(var(--r)); opacity:0; }
+}
+
+.page-special{
+    font-family: "Shantell Sans", "Shantell Sans Fallback", cursive;
+    display: flex;
+    flex direction: column;
+    justify content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.page-special .page-gif{
+    width: 80%;
+    max-width: 220px;
+    height: auto;
+    max-height: 40vh;
+    margin-bottom:15px;
+    border-radius:15px;
+}
+#lyrics-container{
+    font-size:36px;
+    min-height:60px;
+    white-space: pre-line;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+#line-gif{
+    width:180px;
+    margin:15px auto 0;
+    display:none;
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@media(max-width:420px){
+    .text{font-size:20px;}
+    .wishesText{font-size:16px;}
+    .letterSlideshow{height:300px;}
+}
+/* ⭐ STAR BACKGROUND */
+.stars, .stars2, .stars3 {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stars {
+    background:
+        radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 120px 80px, #fff, transparent),
+        radial-gradient(1px 1px at 220px 150px, #fff, transparent),
+        radial-gradient(1px 1px at 300px 200px, #fff, transparent);
+    background-size: 300px 300px;
+    opacity: 0.4;
+    animation: starsMove 40s linear infinite;
+}
+
+.stars2 {
+    background:
+        radial-gradient(1px 1px at 60px 60px, #fff, transparent),
+        radial-gradient(1px 1px at 180px 120px, #fff, transparent),
+        radial-gradient(1px 1px at 260px 40px, #fff, transparent);
+    background-size: 400px 400px;
+    opacity: 0.6;
+    animation: starsMove 60s linear infinite;
+}
+
+.stars3 {
+    background:
+        radial-gradient(2px 2px at 140px 200px, #fff, transparent),
+        radial-gradient(2px 2px at 320px 100px, #fff, transparent);
+    background-size: 600px 600px;
+    opacity: 0.8;
+    animation: starsMove 90s linear infinite;
+}
+
+@keyframes starsMove {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-300px); }
+}
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+<!-- CONFESSION PAGE 1 -->
+<div id="page1" class="page">
+  <div class="page-inner">
+    <div class="text">Happy New Year, Mahi! 🎉</div>
+    <div class="wishesText">
+        Wishing you a year filled with joy, love, and endless smiles.
+        May all your dreams come true, and may you find happiness in every moment.
+        You are special, and I care about you deeply.
+        Here's to new beginnings! 💖
+    </div>
+
+    <div class="emoji">🎊✨❤️🌟</div>
+
+    <div class="text">Hi… 💖</div>
+    <div class="text">Someone has something special to say...</div>
+
+    <div class="letterSlideshow">
+        <div class="slide">The Starting of 11th Class ❤️💖</div>
+        <div class="slide">The most beautiful day ☁️🌤️</div>
+        <div class="slide">2nd June 2024 🎉😊</div>
+        <div class="slide">A Ugly boy saw a Beautiful Girl 👦👧</div>
+        <div class="slide">A Kind Caring And Loving Girl 🌸💕</div>
+        <div class="slide">A Most beautiful Friendship For Me 🌟🤝</div>
+        <div class="slide">Is That Friendship Coming To an End? ❓😢</div>
+        <div class="slide">Or It Is Going To Become A New Starting 🚀✨</div>
+        <div class="slide">Starting of Two lives Together 💑❤️</div>
+        <div class="slide">It Could Be The End But May Be A Starting Of A Journey 👑🌍</div>
+    </div>
+
+    <button class="btn" onclick="openModal()">What I Mean?</button>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        Enter Password 🔒<br><br>
+        <input id="pass" type="password" placeholder="Enter date" style="padding:10px;width:90%;" autocomplete="new-password"><br><br>
+        <button class="btn" onclick="check()">Confirm</button><br>
+        Hint: the date a princess was born 👑
+    </div>
+</div>
+
+<!-- CONFESSION PAGE 2 -->
+<div id="page2" class="page" style="display:none;">
+  <div style="display:flex; flex-direction:column; align-items:center; width:90%; max-width:400px;">
+    <div class="confessionHeading">I MEAN THAT 💕</div>
+    <div class="confessionText">
+As You Know, Last Time I Asked You To Be My Best Friend Via A Website, That Time I Just Wanted To See Your Reaction And That Was Unbelievable 🙈❤.<Br><Br>
+I Love To See You Smiling Every Day 😊.<Br><Br>
+Today I Just Want To Tell You Every Single Thing And I Hope You Are Reading It 📖.<br><br>
+To Be Honest, Not From The First Day, But I Have A Crush On You From A Long Time ❤️.<br><br>
+Literally, Just Imagine Getting So Obsessed With Someone By Looking At Them. And Now You Can't Think Of Anyone Else🫠.<br><br>
+I Know I Am Not Too Rich, Not Too Handsome, Not Too Smart, But I Can Keep Promises Till My Last Breath 🤝,<br><br>
+I Can Live Only With You, Only For You 💑,<br><br>
+I Can Care For You More Than Any Boy 🤗,<br><br>
+You Can Share Your Feelings, Your Day, Your Everything With Me 🥹,<br><br>
+You Can Trust Me, I Won't Break Your Trust Ever... 🔒<br><br>
+Many Boys Will Just Use Your Kindness And Cuteness<br><br>
+It Doesn't Matter Whether You Say Yes Or No, The Decision Is Yours, It's About Your Career, Your Life, Your Future🫤.<br><br>
+The Thing Is, If You Say No (Which Is Obvious), That Will Be Your Final Decision 🤔.<br><br>
+But Your 'yes' Could Be The Most Beautiful Yes Of My Life 🌟.<br><br>
+In Real We Are At The Ending Of This Session, And By The Ending Of Session I Want To Tell You Why I Made Priority Over Anything❤‍🩹.<br><br>
+I Am Hoping That You Are Reading All This 😿.<br><br>
+~A Heart Written Message For Mahi By Riyansh 💌<br><br>
+<br>I Would Like To Tell You Something Before Getting Your Reply😕:</br><br><br>
+I Can’t Give You Treats At Domino’s, Mcdonald’s, Or Kfc 🍔🍟,<br><br>
+But I Will Never Treat You Like Other Boys 😶‍🌫.<br><br>
+I Can’t Buy You Expensive Presents 🎁,<br><br>
+But I Can Give You The Love, Trust, Care, And Loyalty You Truly Deserve 💖✨.<br><br>
+I Can’t Go Malls With You Everyday🛍️,<br><br>
+But I Will Never Think To Undress You 🤭 <br><br>
+Surely We Are Never Going For Oyo And Such Places 👤🧠<br><br>
+But We Will Visit Temples Together For Sure 🕉️🌸.<br><br>
+I Will Never Get Bored Of You. My Love For You Will Remain Same No Matter What You Reply💖.<br><br>
+This Is My Heart Speaking 💌💞 — If You Disagree, I Will Respect Your Decision, But My Love For You Will Always Remain ❤️✨..
+    </div>
+    <button id="finalBtn" class="btn" onclick="showSpecialPage1()">Something for you 💖✨</button>
+  </div>
+</div>
+
+<!-- SPECIAL PROJECT PAGES -->
+<div id="special1" class="page page-special" style="display:none;">
+    <div class="container">
+        <img src="hii.gif" class="page-gif">
+        <h1>Will you do me a favor, please</h1>
+        <p>Use headphones is must 🎧<p>
+        <button class="btn" onclick="fade(special1,special2)">Show me ♥</button>
+    </div>
+</div>
+
+<div id="special2" class="page page-special" style="display:none;">
+    <div class="container">
+        <img src="nervous.gif" class="page-gif">
+        <h1>I want to say something to you</h1>
+        <p>Just listen for a moment 🤍</p>
+        <button class="btn" onclick="startSpecial3()">Open it ♥</button>
+    </div>
+</div>
+
+<div id="special3" class="page page-special" style="display:none;">
+    <div class="container">
+        <div id="lyrics-container"></div>
+        <img id="line-gif">
+    </div>
+</div>
+
+<audio id="song" src="tereliye_clip.mp3"></audio>
+
+<script>
+// CONFESSION SCRIPT
+function openModal(){document.getElementById('modal').style.display='block';}
+function closeModal(){document.getElementById('modal').style.display='none';}
+function check(){
+    if(document.getElementById('pass').value.trim().toLowerCase()==='27 may 2007'){
+        document.getElementById('page1').style.display='none';
+        document.getElementById('page2').style.display='flex';
+        closeModal();
+    }else{ alert('Cutieee Your Input Is Not Correct Try Again'); }
+}
+
+// Slideshow JS
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+function showSlide(index){ slides.forEach((s,i)=> s.style.opacity = i===index?'1':'0'); }
+function nextSlide(){ currentSlide = (currentSlide+1)%slides.length; showSlide(currentSlide); }
+showSlide(currentSlide);
+setInterval(nextSlide,2500);
+
+// Floating hearts/stars/flowers
+const symbols=["💗","🧿","🌸","🫀","🦋"];
+function createFloating(){
+    const span=document.createElement("span");
+    span.className="floating";
+    span.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    span.style.setProperty('--r' , Math.random()*360 + 'deg');
+    span.style.top = "0px"
+    span.style.left=Math.random()*100+"vw";
+    span.style.fontSize=(15+Math.random()*25)+"px";
+    span.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(span);
+    setTimeout(()=>{ span.remove(); },10000);
+}
+setInterval(createFloating,1200);
+
+// SPECIAL PROJECT SCRIPT
+function fade(from,to){
+    from.style.opacity=1;
+    to.style.opacity=0;
+    to.style.display='flex';
+    setTimeout(()=>{
+        from.style.opacity=0;
+        to.style.opacity=1;
+        setTimeout(()=>{from.style.display='none';},500);
+    },50);
+}
+
+const song=document.getElementById("song");
+const lyricsBox=document.getElementById("lyrics-container");
+const gif=document.getElementById("line-gif");
+
+const lyrics=[
+ {time:0, text:"Jaise andhero me tum🌙❤", gif:"paas-aa.gif"},
+ {time:3.10, text:"chandni bhar gaye🙈🩶", gif:"choo-ja.gif"},
+ {time:6, text:"kar chand taro ko🌖✨", gif:"kho-jau.gif"},
+ {time:8.70, text:"mashhoor itna kyun🫠💗", gif:"bahon-me.gif"},
+ {time:11, text:"kambakht inse bhi khubsurat h tuu🤭👀", gif:"wohh.gif"},
+ {time:16, text:"I LOVE YOU🦋🧿", gif:"tereliye.gif"}, 
+ {time:20, text:"Will you Accept?\nTake your Time😬🌷", gif:"accept.gif"}
+];
+
+function showSpecialPage1(){
+    document.getElementById('page2').style.display='none';
+    document.getElementById('special1').style.display='flex';
+}
+
+function startSpecial3(){
+    fade(special2,special3);
+    song.currentTime=0;
+    song.play();
+    let i=0;
+
+    function typeWriter(text, callback){
+        let j=0;
+        lyricsBox.textContent="";
+        function typing(){
+            if(j<text.length){
+                lyricsBox.textContent += text.charAt(j);
+                j++;
+                setTimeout(typing,50);
+            } else { if(callback) callback(); }
+        }
+        typing();
+    }
+
+    function sync(){
+        let t=song.currentTime;
+        if(i<lyrics.length && t>=lyrics[i].time){
+            typeWriter(lyrics[i].text);
+            if(lyrics[i].gif){ gif.src=lyrics[i].gif; gif.style.display="block"; }
+            else{ gif.style.display="none"; }
+            i++;
+        }
+        requestAnimationFrame(sync);
+    }
+    sync();
+}
+</script>
+
+</body>
+</html>
